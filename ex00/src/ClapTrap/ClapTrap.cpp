@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 00:37:53 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/18 01:52:24 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/02/18 02:21:32 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ ClapTrap::~ClapTrap()
 
 void	ClapTrap::attack(const string_t &target)
 {
-	std::cout << "ClapTrap ";
-	printCute(name, Color::bblue + Color::bold);
-	std::cout << " attacks ";
-	printCute(target, Color::blue + Color::bold);
+	std::cout << "ClapTrap " << Emoji::wink;
+	printCute(name, Color::bcyan);
+	std::cout << " attacks" << Emoji::explosion << " " <<Emoji::angry;
+	printCute(target, Color::bred);
 	std::cout << " causing ";
 	printCute(toString(damage), Color::bred);
 	std::cout << " points of damage!" << std::endl;
@@ -66,11 +66,11 @@ void	ClapTrap::attack(const string_t &target)
 
 void	ClapTrap::takeDamage(size_t amount)
 {
-	std::cout << "ClapTrap ";
-	printCute(name, Color::bblue + Color::bold);
-	std::cout << " recieved ";
-	printCute(toString(amount), Color::blue + Color::bold);
-	std::cout << " points of damage!" << std::endl;
+	std::cout << "ClapTrap 😵";
+	printCute(name, Color::bcyan);
+	std::cout << " recieved💢 ";
+	printCute(toString(amount), Color::bred + Color::bold);
+	std::cout << " points of damage!👀" << std::endl;
 	if (hp >= amount)
 		hp -= amount;
 	else
@@ -79,10 +79,10 @@ void	ClapTrap::takeDamage(size_t amount)
 
 void	ClapTrap::beRepaired(size_t amount)
 {
-	std::cout << "ClapTrap ";
-	printCute(name, Color::bblue + Color::bold);
-	std::cout << " Repaired ";
+	std::cout << "ClapTrap 😊";
+	printCute(name, Color::bcyan + Color::bold);
+	std::cout << " Repaired🔨 ";
 	printCute(toString(amount), Color::blue + Color::bold);
-	std::cout << " HealPoints!!" << std::endl;
+	std::cout << " HealPoints!!🚑" << std::endl;
 	hp += amount;
 }
