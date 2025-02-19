@@ -6,7 +6,7 @@
 #    By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 01:23:11 by shurtado          #+#    #+#              #
-#    Updated: 2025/02/19 17:28:00 by shurtado         ###   ########.fr        #
+#    Updated: 2025/02/19 17:40:09 by shurtado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,10 +29,6 @@ DEPS		=	$(OBJS:.o=.d)
 all: $(CUTE) $(NAME)
 
 $(CUTE):
-	@if [ ! -d "$(CUTE_DIR)/.git" ]; then \
-		echo "Submódulo no encontrado. Descargando..."; \
-		git submodule update --init --recursive; \
-	fi
 	$(MAKE) -C $(CUTE_DIR)
 
 $(NAME): $(OBJS) $(CUTE)
