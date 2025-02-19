@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.cpp                                       :+:      :+:    :+:   */
+/*   DiamondTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 00:37:53 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/19 18:00:17 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/02/19 17:00:36 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
-FragTrap::FragTrap() : ClapTrap()
+DiamondTrap::DiamondTrap() : ScavTrap(), FragTrap()
 {
 	hp = 100;
-	energy = 100;
+	energy = 50;
 	damage = 30;
 }
 
-FragTrap::FragTrap(const string_t Name) : ClapTrap(Name)
+DiamondTrap::DiamondTrap(const string_t Name) :
+			ClapTrap(Name + "_clap_name"), ScavTrap(Name),
+			FragTrap(Name)
 {
-	hp = 100;
-	energy = 100;
-	damage = 30;
+	name = Name;
+	hp = FragTrap::hp;
+	energy = ScavTrap::energy;
+	damage = FragTrap::damage;
 }
 
-FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other)
+DiamondTrap::DiamondTrap(const DiamondTrap &other) : ClapTrap(other), ScavTrap(other), FragTrap(other)
 {
 	name = other.name;
 	hp = other.hp;
@@ -34,7 +37,7 @@ FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other)
 	damage = other.damage;
 }
 
-FragTrap&	FragTrap::operator=(const FragTrap &other)
+DiamondTrap&	DiamondTrap::operator=(const DiamondTrap &other)
 {
 	if (this != &other)
 	{
@@ -46,13 +49,13 @@ FragTrap&	FragTrap::operator=(const FragTrap &other)
 	return (*this);
 }
 
-FragTrap::~FragTrap()
+DiamondTrap::~DiamondTrap()
 {
 }
 
-void	FragTrap::attack(const string_t &target)
+void	DiamondTrap::attack(const string_t &target)
 {
-	std::cout << "FragTrap " << "🐺";
+	std::cout << "DiamondTrap 💠";
 	printCute(name, Color::bcyan);
 	std::cout << " attacks" << Emoji::explosion << " " <<Emoji::angry;
 	printCute(target, Color::bred);
@@ -62,9 +65,9 @@ void	FragTrap::attack(const string_t &target)
 	energy--;
 }
 
-void	FragTrap::takeDamage(size_t amount)
+void	DiamondTrap::takeDamage(size_t amount)
 {
-	std::cout << "FragTrap 😵";
+	std::cout << "DiamondTrap 💠";
 	printCute(name, Color::bcyan);
 	std::cout << " recieved💢 ";
 	printCute(toString(amount), Color::bred + Color::bold);
@@ -75,9 +78,9 @@ void	FragTrap::takeDamage(size_t amount)
 		hp = 0;
 }
 
-void	FragTrap::beRepaired(size_t amount)
+void	DiamondTrap::beRepaired(size_t amount)
 {
-	std::cout << "FragTrap 🐺";
+	std::cout << "DiamondTrap 💠";
 	printCute(name, Color::bcyan + Color::bold);
 	std::cout << " Repaired🔨 ";
 	printCute(toString(amount), Color::blue + Color::bold);
@@ -85,9 +88,7 @@ void	FragTrap::beRepaired(size_t amount)
 	hp += amount;
 }
 
-void	FragTrap::highFivesGuy()
+void	DiamondTrap::whoAmI()
 {
-	std::cout << "FragTrap 🐺";
-	printCute(name, Color::bcyan + Color::bold);
-	std::cout << " HighFive!🖐️ " << std::endl;
+	std::cout << "I'm " << name << " my ClapTrap name is: " << ClapTrap::name << "\n";
 }

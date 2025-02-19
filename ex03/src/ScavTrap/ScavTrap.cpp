@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.cpp                                       :+:      :+:    :+:   */
+/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 00:37:53 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/19 18:00:17 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/02/19 17:00:36 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FragTrap.hpp"
+#include "ScavTrap.hpp"
 
-FragTrap::FragTrap() : ClapTrap()
+ScavTrap::ScavTrap() : ClapTrap()
 {
 	hp = 100;
-	energy = 100;
-	damage = 30;
+	energy = 50;
+	damage = 20;
 }
 
-FragTrap::FragTrap(const string_t Name) : ClapTrap(Name)
+ScavTrap::ScavTrap(const string_t Name) : ClapTrap(Name)
 {
 	hp = 100;
-	energy = 100;
-	damage = 30;
+	energy = 50;
+	damage = 20;
 }
 
-FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other)
+ScavTrap::ScavTrap(const ScavTrap &other) : ClapTrap(other)
 {
 	name = other.name;
 	hp = other.hp;
@@ -34,7 +34,7 @@ FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other)
 	damage = other.damage;
 }
 
-FragTrap&	FragTrap::operator=(const FragTrap &other)
+ScavTrap&	ScavTrap::operator=(const ScavTrap &other)
 {
 	if (this != &other)
 	{
@@ -46,13 +46,13 @@ FragTrap&	FragTrap::operator=(const FragTrap &other)
 	return (*this);
 }
 
-FragTrap::~FragTrap()
+ScavTrap::~ScavTrap()
 {
 }
 
-void	FragTrap::attack(const string_t &target)
+void	ScavTrap::attack(const string_t &target)
 {
-	std::cout << "FragTrap " << "🐺";
+	std::cout << "ScavTrap " << Emoji::wink;
 	printCute(name, Color::bcyan);
 	std::cout << " attacks" << Emoji::explosion << " " <<Emoji::angry;
 	printCute(target, Color::bred);
@@ -62,9 +62,9 @@ void	FragTrap::attack(const string_t &target)
 	energy--;
 }
 
-void	FragTrap::takeDamage(size_t amount)
+void	ScavTrap::takeDamage(size_t amount)
 {
-	std::cout << "FragTrap 😵";
+	std::cout << "ScavTrap 😵";
 	printCute(name, Color::bcyan);
 	std::cout << " recieved💢 ";
 	printCute(toString(amount), Color::bred + Color::bold);
@@ -75,9 +75,9 @@ void	FragTrap::takeDamage(size_t amount)
 		hp = 0;
 }
 
-void	FragTrap::beRepaired(size_t amount)
+void	ScavTrap::beRepaired(size_t amount)
 {
-	std::cout << "FragTrap 🐺";
+	std::cout << "ScavTrap 😊";
 	printCute(name, Color::bcyan + Color::bold);
 	std::cout << " Repaired🔨 ";
 	printCute(toString(amount), Color::blue + Color::bold);
@@ -85,9 +85,21 @@ void	FragTrap::beRepaired(size_t amount)
 	hp += amount;
 }
 
-void	FragTrap::highFivesGuy()
+void	ScavTrap::guardGate()
 {
-	std::cout << "FragTrap 🐺";
-	printCute(name, Color::bcyan + Color::bold);
-	std::cout << " HighFive!🖐️ " << std::endl;
+	static bool	guard;
+
+	if (!guard)
+	{
+		std::cout << "ScavTrap 🤖";
+		printCute(name, Color::bcyan + Color::bold);
+		std::cout << " Is on Guard! 🛡️" << std::endl;
+	}
+	else
+	{
+		std::cout << "ScavTrap 🤖";
+		printCute(name, Color::bcyan + Color::bold);
+		std::cout << " Is ready to fight! 👊" << std::endl;
+	}
+	guard = !guard;
 }
