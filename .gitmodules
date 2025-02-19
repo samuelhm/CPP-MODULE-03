@@ -1,3 +1,0 @@
-[submodule "ex00/lib/cute"]
-	path = ex00/lib/cute
-	url = git@github.com:samuelhm/cute_console.git
