@@ -55,14 +55,7 @@ DiamondTrap::~DiamondTrap()
 
 void	DiamondTrap::attack(const string_t &target)
 {
-	std::cout << "DiamondTrap 💠";
-	printCute(name, Color::bcyan);
-	std::cout << " attacks" << Emoji::explosion << " " <<Emoji::angry;
-	printCute(target, Color::bred);
-	std::cout << " causing ";
-	printCute(toString(damage), Color::bred);
-	std::cout << " points of damage!" << std::endl;
-	energy--;
+	return (ScavTrap::attack(target));
 }
 
 void	DiamondTrap::takeDamage(size_t amount)
