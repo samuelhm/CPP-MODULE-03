@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 00:37:53 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/19 18:00:59 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/02/24 09:27:07 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,18 @@ void	FragTrap::takeDamage(size_t amount)
 
 void	FragTrap::beRepaired(size_t amount)
 {
+	if (this->energy == 0)
+	{
+		printCute("No energy to Repair!", Color::bred);
+		return ;
+	}
 	std::cout << "FragTrap 🐺";
 	printCute(name, Color::bcyan + Color::bold);
 	std::cout << " Repaired🔨 ";
 	printCute(toString(amount), Color::blue + Color::bold);
 	std::cout << " HealPoints!!🚑" << std::endl;
 	hp += amount;
+	energy--;
 }
 
 void	FragTrap::highFivesGuy()

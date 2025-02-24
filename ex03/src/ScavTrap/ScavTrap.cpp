@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 00:37:53 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/19 17:00:36 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/02/24 09:26:15 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ ScavTrap::~ScavTrap()
 
 void	ScavTrap::attack(const string_t &target)
 {
+	if (this->energy == 0)
+	{
+		printCute("No energy to Attack!", Color::bred);
+		return ;
+	}
 	std::cout << "ScavTrap " << Emoji::wink;
 	printCute(name, Color::bcyan);
 	std::cout << " attacks" << Emoji::explosion << " " <<Emoji::angry;
@@ -77,12 +82,18 @@ void	ScavTrap::takeDamage(size_t amount)
 
 void	ScavTrap::beRepaired(size_t amount)
 {
+	if (this->energy == 0)
+	{
+		printCute("No energy to Attack!", Color::bred);
+		return ;
+	}
 	std::cout << "ScavTrap 😊";
 	printCute(name, Color::bcyan + Color::bold);
 	std::cout << " Repaired🔨 ";
 	printCute(toString(amount), Color::blue + Color::bold);
 	std::cout << " HealPoints!!🚑" << std::endl;
 	hp += amount;
+	energy--;
 }
 
 void	ScavTrap::guardGate()

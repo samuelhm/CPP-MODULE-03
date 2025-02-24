@@ -73,12 +73,18 @@ void	DiamondTrap::takeDamage(size_t amount)
 
 void	DiamondTrap::beRepaired(size_t amount)
 {
+	if (this->energy == 0)
+	{
+		printCute("No energy to Repair!", Color::bred);
+		return ;
+	}
 	std::cout << "DiamondTrap 💠";
 	printCute(name, Color::bcyan + Color::bold);
 	std::cout << " Repaired🔨 ";
 	printCute(toString(amount), Color::blue + Color::bold);
 	std::cout << " HealPoints!!🚑" << std::endl;
 	hp += amount;
+	energy--;
 }
 
 void	DiamondTrap::whoAmI()

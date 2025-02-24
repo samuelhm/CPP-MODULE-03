@@ -6,7 +6,7 @@
 /*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 00:37:53 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/18 02:21:32 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/02/24 09:24:26 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ ClapTrap::~ClapTrap()
 
 void	ClapTrap::attack(const string_t &target)
 {
+	if (this->energy == 0)
+	{
+		printCute("No energy to Attack!", Color::bred);
+		return ;
+	}
 	std::cout << "ClapTrap " << Emoji::wink;
 	printCute(name, Color::bcyan);
 	std::cout << " attacks" << Emoji::explosion << " " <<Emoji::angry;
@@ -79,10 +84,16 @@ void	ClapTrap::takeDamage(size_t amount)
 
 void	ClapTrap::beRepaired(size_t amount)
 {
+	if (this->energy == 0)
+	{
+		printCute("No energy to Repair!", Color::bred);
+		return ;
+	}
 	std::cout << "ClapTrap 😊";
 	printCute(name, Color::bcyan + Color::bold);
 	std::cout << " Repaired🔨 ";
 	printCute(toString(amount), Color::blue + Color::bold);
 	std::cout << " HealPoints!!🚑" << std::endl;
 	hp += amount;
+	energy--;
 }
