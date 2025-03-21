@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 00:37:55 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/19 16:58:46 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/03/21 11:41:07 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ class ScavTrap : public ClapTrap
 		~ScavTrap();
 
 		void attack(const std::string& target);
-		void takeDamage(size_t amount);
-		void beRepaired(size_t amount);
 
 		void	guardGate();
 };

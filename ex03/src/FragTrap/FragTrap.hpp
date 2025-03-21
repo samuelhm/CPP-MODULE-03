@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 00:37:55 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/19 17:54:05 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/03/21 11:58:30 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "CuteConsole.h"
 #include "../ClapTrap/ClapTrap.hpp"
 
-class FragTrap : virtual public ClapTrap
+class FragTrap : virtual public  ClapTrap
 {
 	public:
 		FragTrap();
@@ -26,9 +26,6 @@ class FragTrap : virtual public ClapTrap
 		~FragTrap();
 
 		void attack(const std::string& target);
-		void takeDamage(size_t amount);
-		void beRepaired(size_t amount);
-
 		void	highFivesGuy();
 };
 

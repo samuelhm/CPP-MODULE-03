@@ -14,9 +14,9 @@
 
 DiamondTrap::DiamondTrap() : ScavTrap(), FragTrap()
 {
-	hp = 100;
-	energy = 50;
-	damage = 30;
+	this->DiamondTrap::hp = 100;
+	this->energy = 50;
+	this->damage = 30;
 }
 
 DiamondTrap::DiamondTrap(const string_t Name) :

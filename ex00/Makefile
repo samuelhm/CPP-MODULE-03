@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+         #
+#    By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 01:23:11 by shurtado          #+#    #+#              #
-#    Updated: 2025/02/19 17:39:53 by shurtado         ###   ########.fr        #
+#    Updated: 2025/03/21 11:22:13 by shurtado         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	ClapTrap
 CC			=	c++
-CPPFLAGS	=	-g -Wall -Werror -Wextra -std=c++98 -MMD -MP
+CPPFLAGS	=	-g -Wall -Werror -Wextra -std=c++98 -MMD -MP -Wshadow
 LDFLAGS		=	-L$(CUTE_DIR) -lcute
 INCLUDES	=	-I$(CUTE_DIR)/inc
 

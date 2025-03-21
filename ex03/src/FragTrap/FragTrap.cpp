@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shurtado <shurtado@student.42.fr>          +#+  +:+       +#+        */
+/*   By: shurtado <shurtado@student.42barcelona.fr> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/18 00:37:53 by shurtado          #+#    #+#             */
-/*   Updated: 2025/02/24 09:27:07 by shurtado         ###   ########.fr       */
+/*   Updated: 2025/03/21 11:58:22 by shurtado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ FragTrap::FragTrap() : ClapTrap()
 	hp = 100;
 	energy = 100;
 	damage = 30;
+	std::cout << "FragTrap "<< name <<" Default Constructor Call\n";
 }
 
 FragTrap::FragTrap(const string_t Name) : ClapTrap(Name)
@@ -24,6 +25,7 @@ FragTrap::FragTrap(const string_t Name) : ClapTrap(Name)
 	hp = 100;
 	energy = 100;
 	damage = 30;
+	std::cout << "FragTrap "<< name <<" Specific Constructor Call\n";
 }
 
 FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other)
@@ -32,6 +34,7 @@ FragTrap::FragTrap(const FragTrap &other) : ClapTrap(other)
 	hp = other.hp;
 	energy = other.energy;
 	damage = other.damage;
+	std::cout << "FragTrap "<< name <<" Copy Constructor Call\n";
 }
 
 FragTrap&	FragTrap::operator=(const FragTrap &other)
@@ -48,10 +51,16 @@ FragTrap&	FragTrap::operator=(const FragTrap &other)
 
 FragTrap::~FragTrap()
 {
+	std::cout << "FragTrap "<< name <<" Default Destructor Call\n";
 }
 
 void	FragTrap::attack(const string_t &target)
 {
+	if (this->energy == 0)
+	{
+		printCute("No energy to Attack!", Color::bred);
+		return ;
+	}
 	std::cout << "FragTrap " << "🐺";
 	printCute(name, Color::bcyan);
 	std::cout << " attacks" << Emoji::explosion << " " <<Emoji::angry;
@@ -59,35 +68,6 @@ void	FragTrap::attack(const string_t &target)
 	std::cout << " causing ";
 	printCute(toString(damage), Color::bred);
 	std::cout << " points of damage!" << std::endl;
-	energy--;
-}
-
-void	FragTrap::takeDamage(size_t amount)
-{
-	std::cout << "FragTrap 😵";
-	printCute(name, Color::bcyan);
-	std::cout << " recieved💢 ";
-	printCute(toString(amount), Color::bred + Color::bold);
-	std::cout << " points of damage!👀" << std::endl;
-	if (hp >= amount)
-		hp -= amount;
-	else
-		hp = 0;
-}
-
-void	FragTrap::beRepaired(size_t amount)
-{
-	if (this->energy == 0)
-	{
-		printCute("No energy to Repair!", Color::bred);
-		return ;
-	}
-	std::cout << "FragTrap 🐺";
-	printCute(name, Color::bcyan + Color::bold);
-	std::cout << " Repaired🔨 ";
-	printCute(toString(amount), Color::blue + Color::bold);
-	std::cout << " HealPoints!!🚑" << std::endl;
-	hp += amount;
 	energy--;
 }
 
