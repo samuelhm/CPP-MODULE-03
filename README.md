@@ -1,74 +1,76 @@
-# CPP Module 03 - Herencia y Polimorfismo
+# CPP Module 03 - Inheritance & Polymorphism
 
-[![Language](https://img.shields.io/badge/Language-C%2B%2B98-blue.svg)](https://isocpp.org/)
-[![Standard](https://img.shields.io/badge/Standard-C%2B%2B98-orange.svg)](https://en.cppreference.com/w/cpp/98)
-[README.md creado exitosamente con:
+[![Language](https://img.shields.io/badge/Language-C++98-00599C?style=for-the-badge&logo=c%2B%2B&logoColor=white)](https://isocpp.org/)
+[![Standard](https://img.shields.io/badge/Standard-C++98-orange?style=for-the-badge)](https://en.cppreference.com/w/cpp/98)
+[![OOP](https://img.shields.io/badge/Paradigm-OOP-blueviolet?style=for-the-badge)](https://en.wikipedia.org/wiki/Object-oriented_programming)
+[![42School](https://img.shields.io/badge/School-42_Barcelona-000000?style=for-the-badge)](https://www.42barcelona.com/)
+[![Inheritance](https://img.shields.io/badge/Concept-Multiple_Inheritance-critical?style=for-the-badge)]()
+[![Diamond Problem](https://img.shields.io/badge/Solved-Diamond_Problem-success?style=for-the-badge)]()
 
-- Badges de tecnologías (C++98, OOP, 42 School)
-- Descripción tipo elevator pitch
-- Features listadas con viñetas
-- Tabla de stack tecnológico
-- Explicación técnica del problema del diamante
-- Diagrama Mermaid de la jerarquía de clases
-- Guía de instalación paso a paso
-- Sección de contacto con enlaces a GitHub y LinkedIn
-a dominio de herencia simple, herencia múltiple y la resolución del problema del diamante. Desarrollado como parte del currículo de 42 Barcelona.
+## Descripción
+
+Implementación progresiva de jerarquías de clases en C++98 que demuestra dominio de herencia simple, herencia múltiple y la resolución del **problema del diamante** mediante herencia virtual. Cada ejercicio construye sobre el anterior, culminando en `DiamondTrap`: una clase que hereda de dos padres con una base común sin duplicación de estado.
 
 ## Características Principales
 
-- Clase base `ClapTrap` con atributos encapsulados (HP, energía, daño) y métodos de acción (`attack`, `takeDamage`, `beRepaired`)
-- `ScavTrap` y `FragTrap` como derivados especializados con métodos únicos (`guardGate`, `highFivesGuy`)
-- `DiamondTrap` implementando herencia múltiple con resolución del ambigüedad del diamante
-- Librería custom `CuteConsole` para output formateado con colores ASCII y soporte de emojis
-- Sistema de construcción modular con Makefiles y dependencias automáticas
+- Clase base `ClapTrap` con encapsulamiento de atributos (HP, energía, daño)
+- Métodos de acción: `attack()`, `takeDamage()`, `beRepaired()`
+- `ScavTrap`: hereda de ClapTrap + método especial `guardGate()`
+- `FragTrap`: hereda de ClapTrap + método especial `highFivesGuy()`
+- `DiamondTrap`: herencia múltiple con resolución del problema del diamante
+- Método introspectivo `whoAmI()` para identificar nombre y nombre ClapTrap
+- Librería custom `CuteConsole` para output formateado con colores y emojis
+- Sistema de build modular con Makefiles y dependencias automáticas
 
 ## Stack Tecnológico
 
 | Tecnología | Propósito |
 |------------|-----------|
-| C++98 | Lenguaje principal (estándar restrictivo) |
+| C++98 | Estándar del lenguaje |
+| g++ | Compilador con flags estrictos |
 | GNU Make | Sistema de construcción |
-| g++ | Compilador con flags estrictos `-Wall -Werror -Wextra` |
-| CuteConsole | Librería propia para output formateado |
+| Virtual Inheritance | Resolución del diamond problem |
+| CuteConsole | Librería propia para I/O formateado |
 
 ## Decisiones Técnicas
 
-La arquitectura del proyecto resuelve uno de los desafíos más complejos de la POO en C++: el **problema del diamante**. Cuando `DiamondTrap` hereda de ambos `ScavTrap` y `FragTrap` (que a su vez heredan de `ClapTrap`), se produce una ambigüedad en la herencia de miembros. La solución implementada utiliza **herencia virtual** y resolución explícita de ámbito, permitiendo que `DiamondTrap` combine comportamientos de ambas clases padre sin duplicación de estado. El proyecto demuestra comprensión profunda de constructores de inicialización, resolución de ambigüedades y diseño de jerarquías de clases robustas.
+El proyecto demuestra la resolución del **diamond problem**, uno de los desafíos clásicos de la POO en C++. Cuando `DiamondTrap` hereda de `ScavTrap` y `FragTrap` (ambos derivan de `ClapTrap`), se produce ambigüedad: ¿cuál `ClapTrap` hereda? La solución implementada utiliza **herencia virtual** (`virtual public ClapTrap`), asegurando una única instancia de la clase base. Adicionalmente, `DiamondTrap` resuelve ambigüedades de métodos sobrescritos delegando explícitamente a `ScavTrap::attack()`. Esta arquitectura evidencia comprensión profunda de inicialización de miembros virtuales, orden de constructores y diseño de jerarquías robustas.
 
 ## Diagrama de Arquitectura
 
 ```mermaid
 classDiagram
+    direction TB
     class ClapTrap {
-        -name: string
-        -hp: size_t
-        -energy: size_t
-        -damage: size_t
-        +attack()
-        +takeDamage()
-        +beRepaired()
+        #string name
+        #size_t hp
+        #size_t energy
+        #size_t damage
+        +attack(target)
+        +takeDamage(amount)
+        +beRepaired(amount)
     }
     
     class ScavTrap {
-        +attack()
+        +attack(target)
         +guardGate()
     }
     
     class FragTrap {
-        +attack()
+        +attack(target)
         +highFivesGuy()
     }
     
     class DiamondTrap {
-        -name: string
-        +attack()
-        +takeDamage()
-        +beRepaired()
+        -string name
+        +attack(target)
+        +takeDamage(amount)
+        +beRepaired(amount)
         +whoAmI()
     }
     
-    ClapTrap <|-- ScavTrap
-    ClapTrap <|-- FragTrap
+    ClapTrap <|-- ScavTrap : virtual
+    ClapTrap <|-- FragTrap : virtual
     ScavTrap <|-- DiamondTrap
     FragTrap <|-- DiamondTrap
 ```
@@ -77,66 +79,66 @@ classDiagram
 
 ```
 CPP-MODULE-03/
-├── ex00/                    # ClapTrap - Clase base
-│   ├── src/
-│   │   ├── ClapTrap/
-│   │   └── main.cpp│   └── lib/cute/          # Librería de output
-├── ex01/                    # ScavTrap - Herencia simple├── ex02/# FragTrap - Herencia simple
-├── ex03/                    # DiamondTrap - Herencia múltiple
-│   └── src/
-│       ├── ClapTrap/
-│       ├── ScavTrap/
-│       ├── FragTrap/
-│       ├── DiamondTrap/
-│       └── main.cpp
-└── README.md
+├── ex00/
+│   ├── src/ClapTrap/
+│   ├── src/main.cpp
+│   └── lib/cute/
+├── ex01/
+│   ├── src/ClapTrap/
+│   ├── src/ScavTrap/
+│   └── lib/cute/
+├── ex02/
+│   ├── src/ClapTrap/
+│   ├── src/ScavTrap/
+│   ├── src/FragTrap/
+│   └── lib/cute/
+└── ex03/
+    ├── src/ClapTrap/
+    ├── src/ScavTrap/
+    ├── src/FragTrap/
+    ├── src/DiamondTrap/
+    ├── src/main.cpp
+    └── lib/cute/
 ```
 
 ## Guía de Instalación
 
-### Requisitos Previos
+### Requisitos
 
-- Compilador C++ compatible con C++98 (g++ o clang++)
+- g++ con soporte C++98
 - GNU Make
 
-### Compilación y Ejecución
+### Compilación
 
 ```bash
-# Clonar el repositorio
 git clone https://github.com/samuelhm/CPP-MODULE-03.git
-cd CPP-MODULE-03
-
-# Entrar al ejercicio deseado (ex00, ex01, ex02, ex03)
-cd ex03# Compilar
+cd CPP-MODULE-03/ex03
 make
-
-# Ejecutar
 ./Diamond
 ```
 
-### Comandos de Desarrollo
+### Comandos
 
 ```bash
-make clean    # Limpiar objetos
-make fclean   # Limpiar todo (incluyendo ejecutable)
-make re       # Recompilar desde cero
+make        # Compilar
+make clean  # Limpiar objetos
+make fclean # Limpiar todo
+make re     # Recompilar
 ```
 
 ## Aprendizajes Demostrados
 
-- Herencia simple y múltiple en C++
-- Resolución del problema del diamante
-- Constructores de inicialización y listas de inicialización
-- Polimorfismo y overriding de métodos
+- Herencia simple y múltiple
+- Herencia virtual y diamond problem
+- Polimorfismo y overriding
+- Inicialización de constructores en jerarquías
 - Encapsulamiento y abstracción
-- Gestión de dependencias con Makefiles
+- Makefiles y gestión de dependencias
 
 ## Contacto
 
-**Samuel Hurtado**
-
-[![GitHub](https://img.shields.io/badge/GitHub-samuelhm-181717?logo=github)](https://github.com/samuelhm/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-shurtado--m-0A66C2?logo=linkedin)](https://www.linkedin.com/in/shurtado-m/)
+[![GitHub](https://img.shields.io/badge/GitHub-samuelhm-181717?style=flat-square&logo=github)](https://github.com/samuelhm/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-shurtado--m-0A66C2?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/shurtado-m/)
 
 ---
 *Desarrollado como parte del currículo de 42 Barcelona*
